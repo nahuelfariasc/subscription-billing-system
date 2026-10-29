@@ -1,0 +1,46 @@
+@startuml
+
+class Customer
+{
+  id : int
+  name : string
+  email : string
+}
+
+class Plan
+{
+  id : int
+  name : string
+  description : string
+  price : float
+  frequency : string
+  active : bool
+}
+
+class Subscription
+{
+  id : int
+  dateStart : date
+  dateEnd : date
+  status : string
+}
+
+class Invoice
+{
+  id : int
+  dateBroadcast : date
+  expiration : date
+  amount : float
+  status : string
+}
+
+class Payment
+{
+  id : int
+  date : date
+  amount : float
+  paymentMethod : string
+  status : string
+}
+
+@enduml
