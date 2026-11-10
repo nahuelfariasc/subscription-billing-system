@@ -1,19 +1,17 @@
 import calendar
-from datetime import date, datetime
-from zoneinfo import ZoneInfo
+from datetime import date
 
-ARGENTINA_TZ = ZoneInfo("America/Argentina/Buenos_Aires")
+from utils.date_utils import get_today
 
 
 class Subscription:
-    def __init__(self, s_date_start, s_date_end, s_status):
+    def __init__(self, s_date_start, s_date_end, s_status, s_client = None, s_plan = None):
         self.date_start = s_date_start
         self.date_end = s_date_end
         self.status = s_status
         self.cancellation_requested = False
-
-    def _get_today(self):
-        return datetime.now(ARGENTINA_TZ).date()
+        self.client = s_client
+        self.plan = s_plan
 
     def _calculate_next_date(self, current_date):
         month = current_date.month + 1
@@ -32,7 +30,7 @@ class Subscription:
         if self.status not in ["pending", "expired"]:
             raise ValueError("Subscription cannot be activated")
 
-        if date_start != self._get_today():
+        if date_start != get_today():
             raise ValueError("Activation date must be today")
         
         self.date_start = date_start
@@ -47,7 +45,7 @@ class Subscription:
         if self.cancellation_requested:
             raise ValueError("Subscription cancellation has been requested")
 
-        today = self._get_today()
+        today = get_today()
 
         if today >= self.date_end:
             self.status = "expired"
@@ -59,7 +57,7 @@ class Subscription:
         if self.status != "active":
             raise ValueError("Only active subscriptions can be cancelled")
 
-        today = self._get_today()
+        today = get_today()
 
         if today < self.date_end:
             self.cancellation_requested = True
@@ -70,7 +68,7 @@ class Subscription:
         if self.status != "active":
             raise ValueError("Only active subscriptions can expire")
 
-        today = self._get_today()
+        today = get_today()
 
         if today < self.date_end:
             raise ValueError("Subscription has not expired yet")

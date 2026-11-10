@@ -1,46 +1,44 @@
 @startuml
 
-class Customer
-{
-  id : int
+class Client {
   name : string
+  last_name : string
   email : string
 }
 
-class Plan
-{
-  id : int
+class Plan {
   name : string
   description : string
   price : float
   frequency : string
-  active : bool
-}
-
-class Subscription
-{
-  id : int
-  dateStart : date
-  dateEnd : date
   status : string
 }
 
-class Invoice
-{
-  id : int
-  dateBroadcast : date
+class Subscription {
+  date_start : date
+  date_end : date
+  status : string
+  cancellation_requested : bool
+}
+
+class Invoice {
+  broadcast : date
   expiration : date
   amount : float
   status : string
 }
 
-class Payment
-{
-  id : int
+class Payment {
   date : date
   amount : float
-  paymentMethod : string
+  method : string
   status : string
 }
+
+Client "1" -- "0..*" Subscription
+Client "1" -- "0..*" Invoice
+Plan "1" -- "0..*" Subscription
+Subscription "1" -- "0..1" Invoice
+Invoice "1" -- "0..1" Payment
 
 @enduml
