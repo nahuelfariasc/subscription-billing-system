@@ -1,46 +1,73 @@
 # S&BM — Subscription & Billing Management
 
-Sistema de gestion de suscripciones y facturacion (OOP, Python + PostgreSQL).
+Subscription and billing management system (OOP, Python + PostgreSQL).
 
-## Requisitos
+## Requirements
 
-- Python 3.10+
-- PostgreSQL 14+ (local o remoto)
-- Cliente SQL (psql, Beekeeper, pgAdmin, etc.)
+- Python 3.14+ (managed with `uv`)
+- PostgreSQL 14+ (local or remote)
+- SQL client (psql, Beekeeper, pgAdmin, etc.)
 
-## Instalacion
+## Installation
 
-1. Clonar el repositorio.
-2. Instalar dependencias (elegir una):
+1. Clone the repository.
+2. Install dependencies (choose one):
    ```bash
    # pip (Windows/macOS/Linux)
    pip install -r requirements.txt
 
-   # uv (recomendado en Arch/Omarchy)
+   # uv (recommended)
    uv pip install -r requirements.txt
    ```
-3. Crear la base de datos y el usuario con tu cliente SQL preferido
-   (psql, Beekeeper, pgAdmin, etc.) y ejecutar `database/schema.sql`.
-   *(Opcional: ejecutar `database/seed.sql` para cargar datos iniciales de prueba).*
-4. Configurar credenciales:
+3. Create the database and user with your preferred SQL client
+   (psql, Beekeeper, pgAdmin, etc.) and run `database/schema.sql`.
+   *(Optional: run `database/seed.sql` to load initial test data).*
+4. Configure credentials:
    ```bash
    cp .env.example .env
-   # editar .env con host, puerto, usuario, password y nombre de DB
+   # edit .env with host, port, user, password and DB name
    ```
 
-## Uso
+## Usage
 
 ```bash
-# con uv
+# with uv
 uv run python main.py
 
-# o activando el venv
+# or activating the venv
 source .venv/bin/activate
 python main.py
+```
+
+## Architecture (N-layer)
+
+- `models/` — domain entities (Client, Plan, Subscription, Invoice, Payment).
+- `services/` — business logic (SubscriptionService).
+- `database/` — data access (config, mappers, *_data).
+- `utils/` — utilities (dates).
+
+Class diagram:
+
+![Class diagram](docs/class-diagram.png)
+
+## Project structure
+
+```
+├── main.py
+├── models/
+├── services/
+├── database/
+├── utils/
+├── tests/
+└── docs/
 ```
 
 ## Tests
 
 ```bash
+# with uv
+uv run python -m unittest tests.test_domain tests.test_integration
+
+# or with active venv
 python -m unittest tests.test_domain tests.test_integration
 ```

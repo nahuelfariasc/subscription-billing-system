@@ -1,7 +1,7 @@
 [project]
 name = "sbm"
 version = "0.1.0"
-description = "Add your description here"
+description = "Subscription and billing management system (OOP, Python + PostgreSQL)"
 readme = "README.md"
 authors = [
     { name = "Nahuel Farias", email = "nahuelfariasc@gmail.com" }
