@@ -1,38 +1,50 @@
 @startuml
 
 class Client {
-  name : string
-  last_name : string
-  email : string
+  - name : string
+  - last_name : string
+  - email : string
+  + update(name, last_name, email)
+  - _validate_email(email) : string
 }
 
 class Plan {
-  name : string
-  description : string
-  price : float
-  frequency : string
-  status : string
+  - name : string
+  - description : string
+  - price : float
+  - frequency : string
+  - status : string
+  + update(name, description, price, frequency, status)
 }
 
 class Subscription {
-  date_start : date
-  date_end : date
-  status : string
-  cancellation_requested : bool
+  - date_start : date
+  - date_end : date
+  - status : string
+  - cancellation_requested : bool
+  + activate(date_start)
+  + renew()
+  + cancel()
+  + expire()
+  - _calculate_next_date(current_date) : date
 }
 
 class Invoice {
-  broadcast : date
-  expiration : date
-  amount : float
-  status : string
+  - broadcast : date
+  - expiration : date
+  - amount : float
+  - status : string
+  + mark_as_paid()
+  + mark_as_overdue()
 }
 
 class Payment {
-  date : date
-  amount : float
-  method : string
-  status : string
+  - date : date
+  - amount : float
+  - method : string
+  - status : string
+  + confirm()
+  + reject()
 }
 
 Client "1" -- "0..*" Subscription

@@ -21,6 +21,7 @@ Sistema de gestion de suscripciones y facturacion (OOP, Python + PostgreSQL).
    ```
 3. Crear la base de datos y el usuario con tu cliente SQL preferido
    (psql, Beekeeper, pgAdmin, etc.) y ejecutar `database/schema.sql`.
+   *(Opcional: ejecutar `database/seed.sql` para cargar datos iniciales de prueba).*
 4. Configurar credenciales:
    ```bash
    cp .env.example .env
