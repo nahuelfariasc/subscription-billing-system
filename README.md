@@ -30,6 +30,11 @@ Sistema de gestion de suscripciones y facturacion (OOP, Python + PostgreSQL).
 ## Uso
 
 ```bash
+# con uv
+uv run python main.py
+
+# o activando el venv
+source .venv/bin/activate
 python main.py
 ```
 
